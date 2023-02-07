@@ -77,30 +77,20 @@ export default createStore({
       });
     },
     async loadDoctors({ commit }) {
-      const doctors = await axios.get(`${process.env.VUE_APP_API_URL}/doctors`);
+      const doctors = await axios.get(
+        `https://tic-proiect.herokuapp.com/doctors`
+      );
       commit("setDoctors", doctors?.data || []);
     },
     async loadDoctor(_, id) {
       const doctor = await axios.get(
-        `${process.env.VUE_APP_API_URL}/doctors/${id}`
+        `https://tic-proiect.herokuapp.com/doctors/${id}`
       );
       return doctor?.data || [];
     },
     async deleteDoctor({ commit }, id) {
-      await axios.delete(`${process.env.VUE_APP_API_URL}/admin/doctors/${id}`, {
-        headers: {
-          authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      });
-      const doctors = await axios.get(`${process.env.VUE_APP_API_URL}/doctors`);
-      commit("setDoctors", doctors?.data || []);
-    },
-    async deletePatient(
-      { commit },
-      { doctorId: idDoctor, patientId: idPatient }
-    ) {
       await axios.delete(
-        `${process.env.VUE_APP_API_URL}/admin/doctors/${idDoctor}/patients/${idPatient}`,
+        `https://tic-proiect.herokuapp.com/admin/doctors/${id}`,
         {
           headers: {
             authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -108,7 +98,24 @@ export default createStore({
         }
       );
       const doctors = await axios.get(
-        `${process.env.VUE_APP_API_URL}/doctors/${idDoctor}`
+        `https://tic-proiect.herokuapp.com/doctors`
+      );
+      commit("setDoctors", doctors?.data || []);
+    },
+    async deletePatient(
+      { commit },
+      { doctorId: idDoctor, patientId: idPatient }
+    ) {
+      await axios.delete(
+        `https://tic-proiect.herokuapp.com/admin/doctors/${idDoctor}/patients/${idPatient}`,
+        {
+          headers: {
+            authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
+      const doctors = await axios.get(
+        `https://tic-proiect.herokuapp.com/doctors/${idDoctor}`
       );
       commit("setDoctors", doctors?.data || []);
     },

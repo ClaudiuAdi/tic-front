@@ -68,11 +68,15 @@ export default {
         description: this.description,
         costPerHour: this.costPerHour,
       };
-      await axios.post(`${process.env.VUE_APP_API_URL}/admin/doctors`, doctor, {
-        headers: {
-          authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      });
+      await axios.post(
+        `https://tic-proiect.herokuapp.com/admin/doctors`,
+        doctor,
+        {
+          headers: {
+            authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
       this.$router.push(`/`);
     },
     resetErrors() {

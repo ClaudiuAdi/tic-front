@@ -156,7 +156,7 @@ export default {
   methods: {
     async getDoctor() {
       const doctor = await axios.get(
-        `${process.env.VUE_APP_API_URL}/doctors/${this.id}`
+        `https://tic-proiect.herokuapp.com/doctors/${this.id}`
       );
       this.doctor = doctor?.data || {};
     },
@@ -168,7 +168,7 @@ export default {
     },
     async savePatient(id) {
       const doctor = await axios.put(
-        `${process.env.VUE_APP_API_URL}/admin/doctors/${this.id}/patients/${id}`,
+        `https://tic-proiect.herokuapp.com/admin/doctors/${this.id}/patients/${id}`,
         {
           email: this.$refs.inputPatient[0].value,
           age: this.$refs.inputPatient[1].value,

@@ -67,7 +67,7 @@ export default {
         problem: this.problem,
       };
       await axios.post(
-        `${process.env.VUE_APP_API_URL}/admin/doctors/${this.id}/patients`,
+        `https://tic-proiect.herokuapp.com/admin/doctors/${this.id}/patients`,
         patient,
         {
           headers: {
